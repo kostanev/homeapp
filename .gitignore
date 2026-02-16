@@ -1,5 +1,5 @@
 ### IDE ###
-.idea
+.idea/
 
 ### OS files ###
 .DS_Store
@@ -17,6 +17,7 @@ mosquitto/config/passwd
 mosquitto/config/*.passwd
 
 ### Node-RED ###
+nodered/data/.npm/
 nodered/data/node_modules/
 nodered/data/context/
 nodered/data/.config.users.json
