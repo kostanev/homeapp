@@ -1,0 +1,24 @@
+### IDE ###
+.idea
+
+### OS files ###
+.DS_Store
+Thumbs.db
+
+### Docker & Environment ###
+.env
+.env.local
+*.log
+
+### Mosquitto (MQTT) ###
+mosquitto/data/
+mosquitto/log/
+mosquitto/config/passwd
+mosquitto/config/*.passwd
+
+### Node-RED ###
+nodered/data/node_modules/
+nodered/data/context/
+nodered/data/.config.users.json
+nodered/data/.sessions.json
+nodered/data/flows*_cred.json
