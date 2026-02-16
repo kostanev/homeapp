@@ -1,0 +1,4320 @@
+[
+    {
+        "id": "56930ca583a30724",
+        "type": "subflow",
+        "name": "web UI | Ch",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "03a5ec83b7d528fe"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 640,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "6ce2745bad15b2e7",
+                        "port": 0
+                    },
+                    {
+                        "id": "c16a2a3d81b55902",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#C0DEED",
+        "icon": "font-awesome/fa-mobile-phone"
+    },
+    {
+        "id": "03a5ec83b7d528fe",
+        "type": "function",
+        "z": "56930ca583a30724",
+        "name": "normalize",
+        "func": "const { on, brightness, temperature, overtemperature, overpower } = msg.payload;\nreturn [\n  { payload: on },\n  { payload: brightness },\n  { payload: `${Math.round(temperature)}°C` },\n  { payload: overtemperature ? 'Yes' : 'No' },\n  { payload: overpower  ? 'Yes' : 'No' }\n];",
+        "outputs": 5,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 140,
+        "wires": [
+            [
+                "aa8b98e7c7536972"
+            ],
+            [
+                "ba06b8b0527944b1"
+            ],
+            [
+                "0372ed18c6b987a3"
+            ],
+            [
+                "cfd249f670fcb5d9"
+            ],
+            [
+                "4b0fd05e31cca2f8"
+            ]
+        ]
+    },
+    {
+        "id": "aa8b98e7c7536972",
+        "type": "ui-switch",
+        "z": "56930ca583a30724",
+        "name": "toggle | on / off",
+        "label": "On / Off",
+        "group": "51c5f0b66acb1db3",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 400,
+        "y": 60,
+        "wires": [
+            [
+                "6ce2745bad15b2e7"
+            ]
+        ]
+    },
+    {
+        "id": "0372ed18c6b987a3",
+        "type": "ui-text",
+        "z": "56930ca583a30724",
+        "group": "51c5f0b66acb1db3",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "temperature",
+        "label": "Temperature",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 410,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "cfd249f670fcb5d9",
+        "type": "ui-text",
+        "z": "56930ca583a30724",
+        "group": "51c5f0b66acb1db3",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "overtemperature",
+        "label": "Overtemperature",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 420,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "4b0fd05e31cca2f8",
+        "type": "ui-text",
+        "z": "56930ca583a30724",
+        "group": "51c5f0b66acb1db3",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "overpower",
+        "label": "Overpower",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 410,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "ba06b8b0527944b1",
+        "type": "ui-slider",
+        "z": "56930ca583a30724",
+        "group": "51c5f0b66acb1db3",
+        "name": "brightness",
+        "label": "Brightness",
+        "tooltip": "",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "thumbLabel": true,
+        "min": "10",
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 410,
+        "y": 100,
+        "wires": [
+            [
+                "c16a2a3d81b55902"
+            ]
+        ]
+    },
+    {
+        "id": "c16a2a3d81b55902",
+        "type": "function",
+        "z": "56930ca583a30724",
+        "name": "",
+        "func": "return {\n  payload: {\n    brightness: msg.payload\n  }\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 545,
+        "y": 100,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "6ce2745bad15b2e7",
+        "type": "function",
+        "z": "56930ca583a30724",
+        "name": "",
+        "func": "return {\n  payload: {\n    turn: msg.payload ? 'on' : 'off'\n  }\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 545,
+        "y": 60,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "51c5f0b66acb1db3",
+        "type": "ui-group",
+        "z": "56930ca583a30724",
+        "name": "Children",
+        "page": "c59aa56799b651c9",
+        "width": "6",
+        "height": "1",
+        "order": 7,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": "false"
+    },
+    {
+        "id": "cc0cff40c0be42c3",
+        "type": "subflow",
+        "name": "web UI | Bath",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "41396108be566aa7"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 620,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "76ba3f16808db218",
+                        "port": 0
+                    },
+                    {
+                        "id": "29b930154dd0844b",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#C0DEED",
+        "icon": "font-awesome/fa-mobile-phone"
+    },
+    {
+        "id": "41396108be566aa7",
+        "type": "function",
+        "z": "cc0cff40c0be42c3",
+        "name": "normalize",
+        "func": "const { on, brightness, temperature, overtemperature, overpower } = msg.payload;\nreturn [\n  { payload: on },\n  { payload: brightness },\n  { payload: `${Math.round(temperature)}°C` },\n  { payload: overtemperature ? 'Yes' : 'No' },\n  { payload: overpower  ? 'Yes' : 'No' }\n];",
+        "outputs": 5,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 140,
+        "wires": [
+            [
+                "e6204061a370d9d4"
+            ],
+            [
+                "37a5e730bc07008f"
+            ],
+            [
+                "ce31adb8f06df631"
+            ],
+            [
+                "f3b23c25ce1274ad"
+            ],
+            [
+                "8606db73e291e20d"
+            ]
+        ]
+    },
+    {
+        "id": "e6204061a370d9d4",
+        "type": "ui-switch",
+        "z": "cc0cff40c0be42c3",
+        "name": "toggle | on / off",
+        "label": "On / Off",
+        "group": "86b9d12ad87eaa24",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 400,
+        "y": 60,
+        "wires": [
+            [
+                "76ba3f16808db218"
+            ]
+        ]
+    },
+    {
+        "id": "ce31adb8f06df631",
+        "type": "ui-text",
+        "z": "cc0cff40c0be42c3",
+        "group": "86b9d12ad87eaa24",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "temperature",
+        "label": "Temperature",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 410,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "f3b23c25ce1274ad",
+        "type": "ui-text",
+        "z": "cc0cff40c0be42c3",
+        "group": "86b9d12ad87eaa24",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "overtemperature",
+        "label": "Overtemperature",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 420,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "8606db73e291e20d",
+        "type": "ui-text",
+        "z": "cc0cff40c0be42c3",
+        "group": "86b9d12ad87eaa24",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "overpower",
+        "label": "Overpower",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 410,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "37a5e730bc07008f",
+        "type": "ui-slider",
+        "z": "cc0cff40c0be42c3",
+        "group": "86b9d12ad87eaa24",
+        "name": "brightness",
+        "label": "Brightness",
+        "tooltip": "",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "thumbLabel": true,
+        "min": "10",
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 410,
+        "y": 100,
+        "wires": [
+            [
+                "29b930154dd0844b"
+            ]
+        ]
+    },
+    {
+        "id": "29b930154dd0844b",
+        "type": "function",
+        "z": "cc0cff40c0be42c3",
+        "name": "",
+        "func": "return {\n  payload: {\n    brightness: msg.payload\n  }\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 545,
+        "y": 100,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "76ba3f16808db218",
+        "type": "function",
+        "z": "cc0cff40c0be42c3",
+        "name": "",
+        "func": "return {\n  payload: {\n    turn: msg.payload ? 'on' : 'off'\n  }\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 545,
+        "y": 60,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "86b9d12ad87eaa24",
+        "type": "ui-group",
+        "z": "cc0cff40c0be42c3",
+        "name": "Bathroom",
+        "page": "c59aa56799b651c9",
+        "width": "6",
+        "height": "1",
+        "order": 9,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": false
+    },
+    {
+        "id": "fbc53d40d3ad022e",
+        "type": "subflow",
+        "name": "web UI | WC",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "e4aee0817bc0e922"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 620,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "f1f1638e07590e44",
+                        "port": 0
+                    },
+                    {
+                        "id": "306e40ce157269d1",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#C0DEED",
+        "icon": "font-awesome/fa-mobile-phone"
+    },
+    {
+        "id": "e4aee0817bc0e922",
+        "type": "function",
+        "z": "fbc53d40d3ad022e",
+        "name": "normalize",
+        "func": "const { on, brightness, temperature, overtemperature, overpower } = msg.payload;\nreturn [\n  { payload: on },\n  { payload: brightness },\n  { payload: `${Math.round(temperature)}°C` },\n  { payload: overtemperature ? 'Yes' : 'No' },\n  { payload: overpower  ? 'Yes' : 'No' }\n];",
+        "outputs": 5,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 140,
+        "wires": [
+            [
+                "7125360eafae9db3"
+            ],
+            [
+                "f2367ffbac3d56ab"
+            ],
+            [
+                "7eb7e9be7cc088b1"
+            ],
+            [
+                "46251cc8bed15393"
+            ],
+            [
+                "1909f0c6228858d2"
+            ]
+        ]
+    },
+    {
+        "id": "7125360eafae9db3",
+        "type": "ui-switch",
+        "z": "fbc53d40d3ad022e",
+        "name": "toggle | on / off",
+        "label": "On / Off",
+        "group": "c54dde3886a22377",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 400,
+        "y": 60,
+        "wires": [
+            [
+                "f1f1638e07590e44"
+            ]
+        ]
+    },
+    {
+        "id": "7eb7e9be7cc088b1",
+        "type": "ui-text",
+        "z": "fbc53d40d3ad022e",
+        "group": "c54dde3886a22377",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "temperature",
+        "label": "Temperature",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 410,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "46251cc8bed15393",
+        "type": "ui-text",
+        "z": "fbc53d40d3ad022e",
+        "group": "c54dde3886a22377",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "overtemperature",
+        "label": "Overtemperature",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 420,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "1909f0c6228858d2",
+        "type": "ui-text",
+        "z": "fbc53d40d3ad022e",
+        "group": "c54dde3886a22377",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "overpower",
+        "label": "Overpower",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 410,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "f2367ffbac3d56ab",
+        "type": "ui-slider",
+        "z": "fbc53d40d3ad022e",
+        "group": "c54dde3886a22377",
+        "name": "brightness",
+        "label": "Brightness",
+        "tooltip": "",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "thumbLabel": true,
+        "min": "10",
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 410,
+        "y": 100,
+        "wires": [
+            [
+                "306e40ce157269d1"
+            ]
+        ]
+    },
+    {
+        "id": "306e40ce157269d1",
+        "type": "function",
+        "z": "fbc53d40d3ad022e",
+        "name": "",
+        "func": "return {\n  payload: {\n    brightness: msg.payload\n  }\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 545,
+        "y": 100,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "f1f1638e07590e44",
+        "type": "function",
+        "z": "fbc53d40d3ad022e",
+        "name": "",
+        "func": "return {\n  payload: {\n    turn: msg.payload ? 'on' : 'off'\n  }\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 545,
+        "y": 60,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "c54dde3886a22377",
+        "type": "ui-group",
+        "z": "fbc53d40d3ad022e",
+        "name": "WC",
+        "page": "c59aa56799b651c9",
+        "width": "6",
+        "height": "1",
+        "order": 8,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": false
+    },
+    {
+        "id": "d21607ed4bd9c3e2",
+        "type": "subflow",
+        "name": "web UI | Bed",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "77cd0b5e15e80ca5"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 640,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "1c96a615e0e16a2a",
+                        "port": 0
+                    },
+                    {
+                        "id": "a9a824ef599a2398",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#C0DEED",
+        "icon": "font-awesome/fa-mobile-phone"
+    },
+    {
+        "id": "77cd0b5e15e80ca5",
+        "type": "function",
+        "z": "d21607ed4bd9c3e2",
+        "name": "normalize",
+        "func": "const { on, brightness, temperature, overtemperature, overpower } = msg.payload;\nreturn [\n  { payload: on },\n  { payload: brightness },\n  { payload: `${Math.round(temperature)}°C` },\n  { payload: overtemperature ? 'Yes' : 'No' },\n  { payload: overpower  ? 'Yes' : 'No' }\n];",
+        "outputs": 5,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 140,
+        "wires": [
+            [
+                "218386783758f116"
+            ],
+            [
+                "d2c55e7f68775f26"
+            ],
+            [
+                "135d3e12242a3c93"
+            ],
+            [
+                "644644fc990ab05c"
+            ],
+            [
+                "5c60f2eaecb84664"
+            ]
+        ]
+    },
+    {
+        "id": "218386783758f116",
+        "type": "ui-switch",
+        "z": "d21607ed4bd9c3e2",
+        "name": "toggle | on / off",
+        "label": "On / Off",
+        "group": "7249de5d656a05c1",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 400,
+        "y": 60,
+        "wires": [
+            [
+                "1c96a615e0e16a2a"
+            ]
+        ]
+    },
+    {
+        "id": "135d3e12242a3c93",
+        "type": "ui-text",
+        "z": "d21607ed4bd9c3e2",
+        "group": "7249de5d656a05c1",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "temperature",
+        "label": "Temperature",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 410,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "644644fc990ab05c",
+        "type": "ui-text",
+        "z": "d21607ed4bd9c3e2",
+        "group": "7249de5d656a05c1",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "overtemperature",
+        "label": "Overtemperature",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 420,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "5c60f2eaecb84664",
+        "type": "ui-text",
+        "z": "d21607ed4bd9c3e2",
+        "group": "7249de5d656a05c1",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "overpower",
+        "label": "Overpower",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 410,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "d2c55e7f68775f26",
+        "type": "ui-slider",
+        "z": "d21607ed4bd9c3e2",
+        "group": "7249de5d656a05c1",
+        "name": "brightness",
+        "label": "Brightness",
+        "tooltip": "",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "thumbLabel": true,
+        "min": "10",
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 410,
+        "y": 100,
+        "wires": [
+            [
+                "a9a824ef599a2398"
+            ]
+        ]
+    },
+    {
+        "id": "a9a824ef599a2398",
+        "type": "function",
+        "z": "d21607ed4bd9c3e2",
+        "name": "",
+        "func": "return {\n  payload: {\n    brightness: msg.payload\n  }\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 545,
+        "y": 100,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "1c96a615e0e16a2a",
+        "type": "function",
+        "z": "d21607ed4bd9c3e2",
+        "name": "",
+        "func": "return {\n  payload: {\n    turn: msg.payload ? 'on' : 'off'\n  }\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 545,
+        "y": 60,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "7249de5d656a05c1",
+        "type": "ui-group",
+        "z": "d21607ed4bd9c3e2",
+        "name": "Bedroom",
+        "page": "c59aa56799b651c9",
+        "width": "6",
+        "height": "1",
+        "order": 6,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": false
+    },
+    {
+        "id": "5774065fbd82585f",
+        "type": "subflow",
+        "name": "web UI | Int",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "bb8e6dbe32cb2930"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 540,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "5e13193493ef2c8a",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 540,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "8a338a12265783b9",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#C0DEED",
+        "icon": "font-awesome/fa-mobile-phone"
+    },
+    {
+        "id": "5e13193493ef2c8a",
+        "type": "ui-switch",
+        "z": "5774065fbd82585f",
+        "name": "toggle | on / off",
+        "label": "On / Off",
+        "group": "c153757bd2ce4c9e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 400,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8a338a12265783b9",
+        "type": "ui-slider",
+        "z": "5774065fbd82585f",
+        "group": "c153757bd2ce4c9e",
+        "name": "brightness",
+        "label": "Brightness",
+        "tooltip": "",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "thumbLabel": true,
+        "min": "10",
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 390,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bb8e6dbe32cb2930",
+        "type": "function",
+        "z": "5774065fbd82585f",
+        "name": "normalize",
+        "func": "const { on, brightness, overpower } = msg.payload;\nreturn [\n  { payload: on },\n  { payload: brightness },\n  { payload: overpower  ? 'Yes' : 'No' }\n];",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 140,
+        "wires": [
+            [
+                "5e13193493ef2c8a"
+            ],
+            [
+                "8a338a12265783b9"
+            ],
+            [
+                "acaf320a57ef8c80"
+            ]
+        ]
+    },
+    {
+        "id": "acaf320a57ef8c80",
+        "type": "ui-text",
+        "z": "5774065fbd82585f",
+        "group": "c153757bd2ce4c9e",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "overpower",
+        "label": "Overpower",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 390,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "c153757bd2ce4c9e",
+        "type": "ui-group",
+        "name": "Living room: Integrated",
+        "page": "c59aa56799b651c9",
+        "width": "6",
+        "height": "1",
+        "order": 4,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": false
+    },
+    {
+        "id": "2f4e178c5ad4e48d",
+        "type": "subflow",
+        "name": "web UI | Amb",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "25f52c3ccb5bd276"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 540,
+                "y": 100,
+                "wires": [
+                    {
+                        "id": "2226cf3795c65d69",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 540,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "9cf747c3d848afdc",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#C0DEED",
+        "icon": "font-awesome/fa-mobile-phone"
+    },
+    {
+        "id": "25f52c3ccb5bd276",
+        "type": "function",
+        "z": "2f4e178c5ad4e48d",
+        "name": "normalize",
+        "func": "const { on, brightness, overpower } = msg.payload;\nreturn [\n  { payload: on },\n  { payload: brightness },\n  { payload: overpower  ? 'Yes' : 'No' }\n];",
+        "outputs": 3,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 140,
+        "wires": [
+            [
+                "2226cf3795c65d69"
+            ],
+            [
+                "9cf747c3d848afdc"
+            ],
+            [
+                "e54f2cded58c3dba"
+            ]
+        ]
+    },
+    {
+        "id": "2226cf3795c65d69",
+        "type": "ui-switch",
+        "z": "2f4e178c5ad4e48d",
+        "name": "toggle | on / off",
+        "label": "On / Off",
+        "group": "0e4aa815f39f2e96",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 400,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9cf747c3d848afdc",
+        "type": "ui-slider",
+        "z": "2f4e178c5ad4e48d",
+        "group": "0e4aa815f39f2e96",
+        "name": "brightness",
+        "label": "Brightness",
+        "tooltip": "",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "thumbLabel": true,
+        "min": "5",
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 390,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e54f2cded58c3dba",
+        "type": "ui-text",
+        "z": "2f4e178c5ad4e48d",
+        "group": "0e4aa815f39f2e96",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "overpower",
+        "label": "Overpower",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 390,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "0e4aa815f39f2e96",
+        "type": "ui-group",
+        "name": "Living room: Ambient",
+        "page": "c59aa56799b651c9",
+        "width": "6",
+        "height": "1",
+        "order": 3,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": false
+    },
+    {
+        "id": "2e41c0e60bcda4c7",
+        "type": "subflow",
+        "name": "web UI | SL",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "8e3c0c5bbcfab58e"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 640,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "7437a1d4bb3fa04d",
+                        "port": 0
+                    },
+                    {
+                        "id": "644b228c12cab9c9",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#C0DEED",
+        "icon": "font-awesome/fa-mobile-phone"
+    },
+    {
+        "id": "8e3c0c5bbcfab58e",
+        "type": "function",
+        "z": "2e41c0e60bcda4c7",
+        "name": "normalize",
+        "func": "const { on, brightness, temperature, overtemperature, overpower } = msg.payload;\nreturn [\n  { payload: on },\n  { payload: brightness },\n  { payload: `${Math.round(temperature)}°C` },\n  { payload: overtemperature ? 'Yes' : 'No' },\n  { payload: overpower  ? 'Yes' : 'No' }\n];",
+        "outputs": 5,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 140,
+        "wires": [
+            [
+                "9d11cad438b01aca"
+            ],
+            [
+                "7eed7f2482171d35"
+            ],
+            [
+                "7c221813329243e5"
+            ],
+            [
+                "a2d48ddcb4766049"
+            ],
+            [
+                "4f34d8580e7b7843"
+            ]
+        ]
+    },
+    {
+        "id": "9d11cad438b01aca",
+        "type": "ui-switch",
+        "z": "2e41c0e60bcda4c7",
+        "name": "toggle | on / off",
+        "label": "On / Off",
+        "group": "6fdff81ac0800b78",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 400,
+        "y": 60,
+        "wires": [
+            [
+                "7437a1d4bb3fa04d"
+            ]
+        ]
+    },
+    {
+        "id": "7c221813329243e5",
+        "type": "ui-text",
+        "z": "2e41c0e60bcda4c7",
+        "group": "6fdff81ac0800b78",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "temperature",
+        "label": "Temperature",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 410,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "a2d48ddcb4766049",
+        "type": "ui-text",
+        "z": "2e41c0e60bcda4c7",
+        "group": "6fdff81ac0800b78",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "overtemperature",
+        "label": "Overtemperature",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 420,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "4f34d8580e7b7843",
+        "type": "ui-text",
+        "z": "2e41c0e60bcda4c7",
+        "group": "6fdff81ac0800b78",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "overpower",
+        "label": "Overpower",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 410,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "7eed7f2482171d35",
+        "type": "ui-slider",
+        "z": "2e41c0e60bcda4c7",
+        "group": "6fdff81ac0800b78",
+        "name": "brightness",
+        "label": "Brightness",
+        "tooltip": "",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "thumbLabel": true,
+        "min": "10",
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 410,
+        "y": 100,
+        "wires": [
+            [
+                "644b228c12cab9c9"
+            ]
+        ]
+    },
+    {
+        "id": "644b228c12cab9c9",
+        "type": "function",
+        "z": "2e41c0e60bcda4c7",
+        "name": "",
+        "func": "return {\n  payload: {\n    brightness: msg.payload\n  }\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 545,
+        "y": 100,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "7437a1d4bb3fa04d",
+        "type": "function",
+        "z": "2e41c0e60bcda4c7",
+        "name": "",
+        "func": "return {\n  payload: {\n    turn: msg.payload ? 'on' : 'off'\n  }\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 545,
+        "y": 60,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "6fdff81ac0800b78",
+        "type": "ui-group",
+        "name": "Living room: Sofa",
+        "page": "c59aa56799b651c9",
+        "width": "6",
+        "height": "1",
+        "order": 5,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": false
+    },
+    {
+        "id": "257349cc625bde40",
+        "type": "subflow",
+        "name": "web UI | DT",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 140,
+                "wires": [
+                    {
+                        "id": "87105726ae6f51c3"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 640,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "83f56f65f7624daf",
+                        "port": 0
+                    },
+                    {
+                        "id": "e5d2f4247d2c00c0",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [],
+        "meta": {},
+        "color": "#C0DEED",
+        "icon": "font-awesome/fa-mobile-phone"
+    },
+    {
+        "id": "87105726ae6f51c3",
+        "type": "function",
+        "z": "257349cc625bde40",
+        "name": "normalize",
+        "func": "const { on, brightness, temperature, overtemperature, overpower } = msg.payload;\nreturn [\n  { payload: on },\n  { payload: brightness },\n  { payload: `${Math.round(temperature)}°C` },\n  { payload: overtemperature ? 'Yes' : 'No' },\n  { payload: overpower  ? 'Yes' : 'No' }\n];",
+        "outputs": 5,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 140,
+        "wires": [
+            [
+                "ecea76a6f07548a8"
+            ],
+            [
+                "4fa61457792b0719"
+            ],
+            [
+                "29a8a5540af72d48"
+            ],
+            [
+                "f7d2cb73957f7fce"
+            ],
+            [
+                "d862d4f9754b1b06"
+            ]
+        ]
+    },
+    {
+        "id": "ecea76a6f07548a8",
+        "type": "ui-switch",
+        "z": "257349cc625bde40",
+        "name": "toggle | on / off",
+        "label": "On / Off",
+        "group": "4eaae3cca0908442",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 400,
+        "y": 60,
+        "wires": [
+            [
+                "83f56f65f7624daf"
+            ]
+        ]
+    },
+    {
+        "id": "29a8a5540af72d48",
+        "type": "ui-text",
+        "z": "257349cc625bde40",
+        "group": "4eaae3cca0908442",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "temperature",
+        "label": "Temperature",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 410,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "f7d2cb73957f7fce",
+        "type": "ui-text",
+        "z": "257349cc625bde40",
+        "group": "4eaae3cca0908442",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "overtemperature",
+        "label": "Overtemperature",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 420,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d862d4f9754b1b06",
+        "type": "ui-text",
+        "z": "257349cc625bde40",
+        "group": "4eaae3cca0908442",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "overpower",
+        "label": "Overpower",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#717171",
+        "className": "",
+        "x": 410,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "4fa61457792b0719",
+        "type": "ui-slider",
+        "z": "257349cc625bde40",
+        "group": "4eaae3cca0908442",
+        "name": "brightness",
+        "label": "Brightness",
+        "tooltip": "",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "passthru": false,
+        "outs": "end",
+        "topic": "topic",
+        "topicType": "msg",
+        "thumbLabel": true,
+        "min": "10",
+        "max": "100",
+        "step": 1,
+        "className": "",
+        "x": 410,
+        "y": 100,
+        "wires": [
+            [
+                "e5d2f4247d2c00c0"
+            ]
+        ]
+    },
+    {
+        "id": "e5d2f4247d2c00c0",
+        "type": "function",
+        "z": "257349cc625bde40",
+        "name": "",
+        "func": "return {\n  payload: {\n    brightness: msg.payload\n  }\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 545,
+        "y": 100,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "83f56f65f7624daf",
+        "type": "function",
+        "z": "257349cc625bde40",
+        "name": "",
+        "func": "return {\n  payload: {\n    turn: msg.payload ? 'on' : 'off'\n  }\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 545,
+        "y": 60,
+        "wires": [
+            []
+        ],
+        "l": false
+    },
+    {
+        "id": "4eaae3cca0908442",
+        "type": "ui-group",
+        "name": "Kitchen: Dinning table",
+        "page": "c59aa56799b651c9",
+        "width": "6",
+        "height": "1",
+        "order": 2,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": false
+    },
+    {
+        "id": "c59aa56799b651c9",
+        "type": "ui-page",
+        "name": "Home",
+        "ui": "e50461ed35e39340",
+        "path": "/home",
+        "icon": "home",
+        "layout": "grid",
+        "theme": "66b52bbeabf9de9f",
+        "order": -1,
+        "className": "",
+        "visible": "true",
+        "disabled": false
+    },
+    {
+        "id": "e50461ed35e39340",
+        "type": "ui-base",
+        "name": "My Dashboard",
+        "path": "/dashboard",
+        "includeClientData": true,
+        "acceptsClientConfig": [
+            "ui-notification",
+            "ui-control"
+        ],
+        "showPathInSidebar": false,
+        "navigationStyle": "default"
+    },
+    {
+        "id": "66b52bbeabf9de9f",
+        "type": "ui-theme",
+        "name": "Default Theme",
+        "colors": {
+            "surface": "#ffffff",
+            "primary": "#0094CE",
+            "bgPage": "#eeeeee",
+            "groupBg": "#ffffff",
+            "groupOutline": "#cccccc"
+        },
+        "sizes": {
+            "pagePadding": "12px",
+            "groupGap": "12px",
+            "groupBorderRadius": "4px",
+            "widgetGap": "12px"
+        }
+    },
+    {
+        "id": "79a320b1aad5b1c6",
+        "type": "subflow",
+        "name": "rgbw in",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 60,
+                "wires": [
+                    {
+                        "id": "12e1f1ecacab1fdb"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 980,
+                "y": 60,
+                "wires": [
+                    {
+                        "id": "a5065b3bda883d72",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "name",
+                "type": "str",
+                "value": ""
+            },
+            {
+                "name": "relay",
+                "type": "num",
+                "value": ""
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "12e1f1ecacab1fdb",
+        "type": "function",
+        "z": "79a320b1aad5b1c6",
+        "name": "filter | by name & relay",
+        "func": "const name = `shellies/${env.get('name')}/white/${env.get('relay')}`;\n\nif (msg.topic.startsWith(name)) {\n  return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 60,
+        "wires": [
+            [
+                "0ce888e8a0051fd8"
+            ]
+        ]
+    },
+    {
+        "id": "44f3564f8666c6dd",
+        "type": "function",
+        "z": "79a320b1aad5b1c6",
+        "name": "manage state",
+        "func": "let state = flow.get('state') || {};\n\nstate = {\n  ...state,\n  ...msg.payload\n};\n\nflow.set('state', state);\n\nreturn {\n  type: 'state',\n  payload: state\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 60,
+        "wires": [
+            [
+                "a5065b3bda883d72"
+            ]
+        ]
+    },
+    {
+        "id": "0ce888e8a0051fd8",
+        "type": "function",
+        "z": "79a320b1aad5b1c6",
+        "name": "normalize payload",
+        "func": "if (msg.topic.endsWith('/status')) {\n  const { ison, brightness, overpower } = msg.payload;\n  return {\n    payload: {\n      on: ison,\n      brightness,\n      overpower\n    }\n  };\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 450,
+        "y": 60,
+        "wires": [
+            [
+                "44f3564f8666c6dd"
+            ]
+        ]
+    },
+    {
+        "id": "a5065b3bda883d72",
+        "type": "rbe",
+        "z": "79a320b1aad5b1c6",
+        "name": "on change",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 850,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "2d585252458c7615",
+        "type": "subflow",
+        "name": "processing",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 120,
+                "wires": [
+                    {
+                        "id": "5f258bcaab943cf3"
+                    },
+                    {
+                        "id": "9ac8057d58a83241"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 820,
+                "y": 240,
+                "wires": [
+                    {
+                        "id": "891f2718db62c087",
+                        "port": 0
+                    },
+                    {
+                        "id": "f125214e2289d8dc",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "timeout",
+                "type": "num",
+                "value": "300"
+            },
+            {
+                "name": "step",
+                "type": "num",
+                "value": "1"
+            },
+            {
+                "name": "min",
+                "type": "num",
+                "value": "10"
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "891f2718db62c087",
+        "type": "function",
+        "z": "2d585252458c7615",
+        "name": "filter | single_push",
+        "func": "if (msg.payload.event === 'single_push') {\n  return {\n    payload: {\n      turn: 'toggle'\n    }\n  };\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 240,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "70f1720456e3896f",
+        "type": "function",
+        "z": "2d585252458c7615",
+        "name": "filter | long_push",
+        "func": "if (msg.payload.event === 'long_push') {\n  return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 300,
+        "wires": [
+            [
+                "f125214e2289d8dc"
+            ]
+        ]
+    },
+    {
+        "id": "9355e0933b161646",
+        "type": "function",
+        "z": "2d585252458c7615",
+        "name": "filter | btn_up",
+        "func": "if (msg.payload.event === 'btn_up') {\n  return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 470,
+        "y": 180,
+        "wires": [
+            [
+                "362aab73dfafe062"
+            ]
+        ]
+    },
+    {
+        "id": "f125214e2289d8dc",
+        "type": "function",
+        "z": "2d585252458c7615",
+        "name": "start timer",
+        "func": "const step = env.get('step');\nconst timeout = env.get('timeout');\nconst min = env.get('min');\n\nlet transitionUp = flow.get('transitionUp') || false;\ntransitionUp = !transitionUp;\nflow.set('transitionUp', transitionUp);\n\nlet transitionBrightness = flow.get('transitionBrightness');\n\nconst changeBrightness = () => {\n  if (transitionUp) {\n    transitionBrightness += step;\n    if (transitionBrightness > 100) {\n      transitionBrightness = 100;\n    }\n  } else {\n    transitionBrightness -= step;\n    if (transitionBrightness < min) {\n      transitionBrightness = min;\n    }\n  }\n\n  node.send({\n    payload: {\n      brightness: transitionBrightness\n    }\n  });\n};\n\nchangeBrightness();\n\nflow.set('timer', setInterval(changeBrightness, timeout));",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "362aab73dfafe062",
+        "type": "function",
+        "z": "2d585252458c7615",
+        "name": "stop timer",
+        "func": "let timer = flow.get('timer') || null;\n\nif (timer) {\n  clearInterval(timer);\n  timer = null;\n}\n\nflow.set('timer', timer);",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "5f258bcaab943cf3",
+        "type": "function",
+        "z": "2d585252458c7615",
+        "name": "filter | type = state",
+        "func": "if (msg.type === 'state') {\n  return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 210,
+        "y": 60,
+        "wires": [
+            [
+                "0d71b03b0e9f5cea"
+            ]
+        ]
+    },
+    {
+        "id": "9ac8057d58a83241",
+        "type": "function",
+        "z": "2d585252458c7615",
+        "name": "filter | type = change",
+        "func": "if (msg.type === 'change') {\n  return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 220,
+        "y": 180,
+        "wires": [
+            [
+                "891f2718db62c087",
+                "70f1720456e3896f",
+                "9355e0933b161646",
+                "85d863c0570fe74d"
+            ]
+        ]
+    },
+    {
+        "id": "0d71b03b0e9f5cea",
+        "type": "function",
+        "z": "2d585252458c7615",
+        "name": "set brightness",
+        "func": "flow.set('brightness', msg.payload.brightness);",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "49a1da1ce492843e",
+        "type": "function",
+        "z": "2d585252458c7615",
+        "name": "set transitionBrightness",
+        "func": "const brightness = flow.get('brightness');\n\nflow.set('transitionBrightness', brightness);",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "85d863c0570fe74d",
+        "type": "function",
+        "z": "2d585252458c7615",
+        "name": "filter | btn_down",
+        "func": "if (msg.payload.event === 'btn_down') {\n  return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 120,
+        "wires": [
+            [
+                "49a1da1ce492843e",
+                "362aab73dfafe062"
+            ]
+        ]
+    },
+    {
+        "id": "cbef3ce630f61ff7",
+        "type": "subflow",
+        "name": "buttons",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "6ad05ebfdf618fc3"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 1240,
+                "y": 80,
+                "wires": [
+                    {
+                        "id": "840625cf049a82f7",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "name",
+                "type": "str",
+                "value": ""
+            },
+            {
+                "name": "button",
+                "type": "num",
+                "value": ""
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "6ad05ebfdf618fc3",
+        "type": "function",
+        "z": "cbef3ce630f61ff7",
+        "name": "filter | by name",
+        "func": "const name = `shellies/${env.get('name')}`;\n\nif (msg.topic.startsWith(name)) {\n  return msg;\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 80,
+        "wires": [
+            [
+                "4ce3dc7b2d543dec"
+            ]
+        ]
+    },
+    {
+        "id": "76e1efb068f43e47",
+        "type": "function",
+        "z": "cbef3ce630f61ff7",
+        "name": "filter | method = NotifyEvent",
+        "func": "const { method } = msg.payload;\n\nif (method === 'NotifyEvent') {\n  return msg;\n}\n\nnode.warn('buttons in: unexpected method ' + method);",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 80,
+        "wires": [
+            [
+                "65a7bcd18395c494"
+            ]
+        ]
+    },
+    {
+        "id": "65a7bcd18395c494",
+        "type": "function",
+        "z": "cbef3ce630f61ff7",
+        "name": "normalize payload",
+        "func": "const { params: { events } } = msg.payload;\n\nfor (const ev of events) {\n  const { id, event } = ev;\n\n  node.send({\n    type: 'change',\n    payload: {\n      input: id,\n      event\n    }\n  });\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 890,
+        "y": 80,
+        "wires": [
+            [
+                "840625cf049a82f7"
+            ]
+        ]
+    },
+    {
+        "id": "4ce3dc7b2d543dec",
+        "type": "function",
+        "z": "cbef3ce630f61ff7",
+        "name": "filter | only rpc",
+        "func": "if (msg.topic.endsWith('/events/rpc')) {\n  return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 80,
+        "wires": [
+            [
+                "76e1efb068f43e47"
+            ]
+        ]
+    },
+    {
+        "id": "840625cf049a82f7",
+        "type": "function",
+        "z": "cbef3ce630f61ff7",
+        "name": "filter | by button",
+        "func": "const buttonId = env.get('button');\nconst { input } = msg.payload;\n\nif (input === buttonId) {\n  return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1100,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4c0cd1386899de21",
+        "type": "subflow",
+        "name": "dimmer out",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 60,
+                "wires": [
+                    {
+                        "id": "293e9abc4b0a8ae2"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 340,
+                "y": 60,
+                "wires": [
+                    {
+                        "id": "293e9abc4b0a8ae2",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "name",
+                "type": "str",
+                "value": ""
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "293e9abc4b0a8ae2",
+        "type": "function",
+        "z": "4c0cd1386899de21",
+        "name": "change payload",
+        "func": "const topic = `shellies/${env.get('name')}/light/0/set`;\nreturn {\n  topic,\n  payload: msg.payload\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "492ba385940b0a9c",
+        "type": "subflow",
+        "name": "dimmer in",
+        "info": "",
+        "category": "",
+        "in": [
+            {
+                "x": 60,
+                "y": 60,
+                "wires": [
+                    {
+                        "id": "e34ac6e461647328"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 940,
+                "y": 60,
+                "wires": [
+                    {
+                        "id": "b2ce07f13984236e",
+                        "port": 0
+                    }
+                ]
+            }
+        ],
+        "env": [
+            {
+                "name": "name",
+                "type": "str",
+                "value": ""
+            }
+        ],
+        "meta": {},
+        "color": "#DDAA99"
+    },
+    {
+        "id": "e34ac6e461647328",
+        "type": "function",
+        "z": "492ba385940b0a9c",
+        "name": "filter | by name",
+        "func": "const name = `shellies/${env.get('name')}`;\n\nif (msg.topic.startsWith(name)) {\n  return msg;\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 60,
+        "wires": [
+            [
+                "b9774548453d2767"
+            ]
+        ]
+    },
+    {
+        "id": "2684f85fe3ec50f9",
+        "type": "function",
+        "z": "492ba385940b0a9c",
+        "name": "manage state",
+        "func": "let state = flow.get('state') || {};\n\nstate = {\n  ...state,\n  ...msg.payload\n};\n\nflow.set('state', state);\n\nreturn {\n  type: 'state',\n  payload: state\n};",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 620,
+        "y": 60,
+        "wires": [
+            [
+                "b2ce07f13984236e"
+            ]
+        ]
+    },
+    {
+        "id": "b9774548453d2767",
+        "type": "function",
+        "z": "492ba385940b0a9c",
+        "name": "normalize payload",
+        "func": "if (msg.topic.endsWith('/light/0/status')) {\n  const { ison, brightness } = msg.payload;\n  return {\n    payload: {\n      on: ison,\n      brightness\n    }\n  };\n}\n\nif (msg.topic.endsWith('/temperature')) {\n  return {\n    payload: {\n      temperature: msg.payload\n    }\n  };\n}\n\nif (msg.topic.endsWith('/overtemperature')) {\n  return {\n    payload: {\n      overtemperature: msg.payload !== 0\n    }\n  };\n}\n\nif (msg.topic.endsWith('/overpower')) {\n  return {\n    payload: {\n      overpower: msg.payload !== 0\n    }\n  };\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 60,
+        "wires": [
+            [
+                "2684f85fe3ec50f9"
+            ]
+        ]
+    },
+    {
+        "id": "b2ce07f13984236e",
+        "type": "rbe",
+        "z": "492ba385940b0a9c",
+        "name": "on change",
+        "func": "rbe",
+        "gap": "",
+        "start": "",
+        "inout": "out",
+        "septopics": false,
+        "property": "payload",
+        "topi": "topic",
+        "x": 810,
+        "y": 60,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a0a86b2bcc8e6558",
+        "type": "tab",
+        "label": "home",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "70e28aaa371d1526",
+        "type": "group",
+        "z": "a0a86b2bcc8e6558",
+        "name": "Kitchen: Dinning table",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "a7f2a6506d759447",
+            "2df5cf650d34edcc",
+            "afe24f902e571f2e",
+            "715338d3f4fb3ac7",
+            "827e07c098b505e0",
+            "4daba07e960c2eeb",
+            "c7d95af3ca07ce4b",
+            "aee391f4442804ee"
+        ],
+        "x": 14,
+        "y": 39,
+        "w": 992,
+        "h": 162
+    },
+    {
+        "id": "f55d2c7b19e0ede8",
+        "type": "group",
+        "z": "a0a86b2bcc8e6558",
+        "name": "Living room: Sofa lamp",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "1ede78aab2135743",
+            "44960675995b0228",
+            "b6923abe8da22af2",
+            "8650945b0b55de40",
+            "d6ce41d151adbb27",
+            "68903cc1339976f2",
+            "8ca38bb40b5b141a",
+            "1c05965e272d4559"
+        ],
+        "x": 14,
+        "y": 219,
+        "w": 992,
+        "h": 162
+    },
+    {
+        "id": "e41b34ecb4de2eb1",
+        "type": "group",
+        "z": "a0a86b2bcc8e6558",
+        "name": "Living room: Ambient light",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "897f1c25eac5ef6b",
+            "adea4321f7d65fbc",
+            "0f6e5e05a384ccbc",
+            "c43d88f0a6cf9ecb",
+            "4fc074817167e9f9",
+            "9028556566f2cb37",
+            "9c001ea7d54b0057",
+            "03a7df41c74aca51",
+            "dcd2cc4da81c2d2b",
+            "7a1427a0b4711d76"
+        ],
+        "x": 14,
+        "y": 399,
+        "w": 1072,
+        "h": 162
+    },
+    {
+        "id": "7e6a568d010b4632",
+        "type": "group",
+        "z": "a0a86b2bcc8e6558",
+        "name": "Living room: Integrated lights",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "c6b94d40a07b7571",
+            "913682f3b59ac52b",
+            "475f75c4c2eb10d8",
+            "f10ee5104e707864",
+            "773441761db531ea",
+            "1e5fd71a8ed698bf",
+            "b4b181ef4be0a915",
+            "3884ac35ae472890",
+            "e52a4e7bc08c18ca",
+            "e77701baef16ec49"
+        ],
+        "x": 14,
+        "y": 579,
+        "w": 1072,
+        "h": 162
+    },
+    {
+        "id": "8b798a26c7d6fc01",
+        "type": "group",
+        "z": "a0a86b2bcc8e6558",
+        "name": "Bedroom",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "7d367520dbc9ad84",
+            "d793a97038cfc19d",
+            "f3d5015e09634c2c",
+            "4eb63e5365042d67",
+            "a13f24cb6365754e",
+            "cb54ed4d7ff08f9a",
+            "45203cfbac0c2608",
+            "ec652bed47668666"
+        ],
+        "x": 14,
+        "y": 759,
+        "w": 992,
+        "h": 162
+    },
+    {
+        "id": "593259f5b14bdad3",
+        "type": "group",
+        "z": "a0a86b2bcc8e6558",
+        "name": "WC & Bathroom",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "e6f34c6d41f62cb4",
+            "72d12326ac27d3d0",
+            "5b0a167104357373",
+            "877b6b22f10fe625",
+            "3e90cd523b63f9bf",
+            "1a28bdf18ec8e12e",
+            "0ffde8114552b859",
+            "7cce2dea7ab2e57d",
+            "da34552cedea09aa",
+            "0ed030613fccdd05"
+        ],
+        "x": 14,
+        "y": 939,
+        "w": 992,
+        "h": 202
+    },
+    {
+        "id": "475b29c6fe19cc2f",
+        "type": "group",
+        "z": "a0a86b2bcc8e6558",
+        "name": "Kitchen: Cabinet",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "bd622d957a6649e7",
+            "0e715d3cd4295d30",
+            "3ad3acf5882144a3",
+            "44acc098596467ab",
+            "690fa293b8ad6c11"
+        ],
+        "x": 1034,
+        "y": 59,
+        "w": 432,
+        "h": 82
+    },
+    {
+        "id": "c670bbc601d06f66",
+        "type": "group",
+        "z": "a0a86b2bcc8e6558",
+        "name": "Children",
+        "style": {
+            "label": true
+        },
+        "nodes": [
+            "ac21c02cac1dfbb9",
+            "6945fa7671640154",
+            "7e353c865aeadf04",
+            "b6e75cf8831334d2",
+            "99f02fbd5222c74c"
+        ],
+        "x": 1034,
+        "y": 759,
+        "w": 652,
+        "h": 142
+    },
+    {
+        "id": "a7f2a6506d759447",
+        "type": "mqtt in",
+        "z": "a0a86b2bcc8e6558",
+        "g": "70e28aaa371d1526",
+        "name": "mqtt",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "872ce2a0d0bada26",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 120,
+        "wires": [
+            [
+                "2df5cf650d34edcc",
+                "c7d95af3ca07ce4b",
+                "827e07c098b505e0"
+            ]
+        ]
+    },
+    {
+        "id": "2df5cf650d34edcc",
+        "type": "subflow:492ba385940b0a9c",
+        "z": "a0a86b2bcc8e6558",
+        "g": "70e28aaa371d1526",
+        "name": "dimmer in | kitchen lamp",
+        "env": [
+            {
+                "name": "name",
+                "value": "kitchen-lamp",
+                "type": "str"
+            }
+        ],
+        "x": 290,
+        "y": 80,
+        "wires": [
+            [
+                "4daba07e960c2eeb",
+                "aee391f4442804ee"
+            ]
+        ]
+    },
+    {
+        "id": "afe24f902e571f2e",
+        "type": "mqtt out",
+        "z": "a0a86b2bcc8e6558",
+        "g": "70e28aaa371d1526",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "872ce2a0d0bada26",
+        "x": 930,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "715338d3f4fb3ac7",
+        "type": "subflow:4c0cd1386899de21",
+        "z": "a0a86b2bcc8e6558",
+        "g": "70e28aaa371d1526",
+        "name": "dimmer out | kitchen lamp",
+        "env": [
+            {
+                "name": "name",
+                "value": "kitchen-lamp",
+                "type": "str"
+            }
+        ],
+        "x": 750,
+        "y": 100,
+        "wires": [
+            [
+                "afe24f902e571f2e"
+            ]
+        ]
+    },
+    {
+        "id": "827e07c098b505e0",
+        "type": "subflow:cbef3ce630f61ff7",
+        "z": "a0a86b2bcc8e6558",
+        "g": "70e28aaa371d1526",
+        "name": "buttons | living room | 3",
+        "env": [
+            {
+                "name": "name",
+                "value": "living-room-buttons",
+                "type": "str"
+            },
+            {
+                "name": "button",
+                "value": "3",
+                "type": "num"
+            },
+            {
+                "name": "buttonId",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "id",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "input",
+                "value": "0",
+                "type": "num"
+            }
+        ],
+        "x": 290,
+        "y": 160,
+        "wires": [
+            [
+                "4daba07e960c2eeb"
+            ]
+        ]
+    },
+    {
+        "id": "4daba07e960c2eeb",
+        "type": "subflow:2d585252458c7615",
+        "z": "a0a86b2bcc8e6558",
+        "g": "70e28aaa371d1526",
+        "name": "",
+        "env": [
+            {
+                "name": "timeout",
+                "value": "500",
+                "type": "num"
+            },
+            {
+                "name": "step",
+                "value": "5",
+                "type": "num"
+            }
+        ],
+        "x": 530,
+        "y": 120,
+        "wires": [
+            [
+                "715338d3f4fb3ac7"
+            ]
+        ]
+    },
+    {
+        "id": "1ede78aab2135743",
+        "type": "mqtt in",
+        "z": "a0a86b2bcc8e6558",
+        "g": "f55d2c7b19e0ede8",
+        "name": "mqtt",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "872ce2a0d0bada26",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 300,
+        "wires": [
+            [
+                "44960675995b0228",
+                "b6923abe8da22af2",
+                "8650945b0b55de40"
+            ]
+        ]
+    },
+    {
+        "id": "c7d95af3ca07ce4b",
+        "type": "subflow:cbef3ce630f61ff7",
+        "z": "a0a86b2bcc8e6558",
+        "g": "70e28aaa371d1526",
+        "name": "buttons | kitchen | 0",
+        "env": [
+            {
+                "name": "name",
+                "value": "kitchen-buttons",
+                "type": "str"
+            },
+            {
+                "name": "button",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "buttonId",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "id",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "input",
+                "value": "0",
+                "type": "num"
+            }
+        ],
+        "x": 270,
+        "y": 120,
+        "wires": [
+            [
+                "4daba07e960c2eeb"
+            ]
+        ]
+    },
+    {
+        "id": "44960675995b0228",
+        "type": "subflow:492ba385940b0a9c",
+        "z": "a0a86b2bcc8e6558",
+        "g": "f55d2c7b19e0ede8",
+        "name": "dimmer in | sofa lamp",
+        "env": [
+            {
+                "name": "name",
+                "value": "sofa-lamp",
+                "type": "str"
+            }
+        ],
+        "x": 280,
+        "y": 260,
+        "wires": [
+            [
+                "d6ce41d151adbb27",
+                "1c05965e272d4559"
+            ]
+        ]
+    },
+    {
+        "id": "b6923abe8da22af2",
+        "type": "subflow:cbef3ce630f61ff7",
+        "z": "a0a86b2bcc8e6558",
+        "g": "f55d2c7b19e0ede8",
+        "name": "buttons in | kitchen | 1",
+        "env": [
+            {
+                "name": "name",
+                "value": "kitchen-buttons",
+                "type": "str"
+            },
+            {
+                "name": "button",
+                "value": "1",
+                "type": "num"
+            },
+            {
+                "name": "buttonId",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "id",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "input",
+                "value": "0",
+                "type": "num"
+            }
+        ],
+        "x": 280,
+        "y": 300,
+        "wires": [
+            [
+                "d6ce41d151adbb27"
+            ]
+        ]
+    },
+    {
+        "id": "8650945b0b55de40",
+        "type": "subflow:cbef3ce630f61ff7",
+        "z": "a0a86b2bcc8e6558",
+        "g": "f55d2c7b19e0ede8",
+        "name": "buttons in | living room | 2",
+        "env": [
+            {
+                "name": "name",
+                "value": "living-room-buttons",
+                "type": "str"
+            },
+            {
+                "name": "button",
+                "value": "2",
+                "type": "num"
+            },
+            {
+                "name": "buttonId",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "id",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "input",
+                "value": "0",
+                "type": "num"
+            }
+        ],
+        "x": 290,
+        "y": 340,
+        "wires": [
+            [
+                "d6ce41d151adbb27"
+            ]
+        ]
+    },
+    {
+        "id": "d6ce41d151adbb27",
+        "type": "subflow:2d585252458c7615",
+        "z": "a0a86b2bcc8e6558",
+        "g": "f55d2c7b19e0ede8",
+        "name": "",
+        "env": [
+            {
+                "name": "timeout",
+                "value": "500",
+                "type": "num"
+            },
+            {
+                "name": "step",
+                "value": "5",
+                "type": "num"
+            }
+        ],
+        "x": 530,
+        "y": 300,
+        "wires": [
+            [
+                "68903cc1339976f2"
+            ]
+        ]
+    },
+    {
+        "id": "68903cc1339976f2",
+        "type": "subflow:4c0cd1386899de21",
+        "z": "a0a86b2bcc8e6558",
+        "g": "f55d2c7b19e0ede8",
+        "name": "dimmer out | sofa lamp",
+        "env": [
+            {
+                "name": "name",
+                "value": "sofa-lamp",
+                "type": "str"
+            }
+        ],
+        "x": 740,
+        "y": 280,
+        "wires": [
+            [
+                "8ca38bb40b5b141a"
+            ]
+        ]
+    },
+    {
+        "id": "8ca38bb40b5b141a",
+        "type": "mqtt out",
+        "z": "a0a86b2bcc8e6558",
+        "g": "f55d2c7b19e0ede8",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "872ce2a0d0bada26",
+        "x": 930,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "897f1c25eac5ef6b",
+        "type": "mqtt in",
+        "z": "a0a86b2bcc8e6558",
+        "g": "e41b34ecb4de2eb1",
+        "name": "mqtt",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "872ce2a0d0bada26",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 480,
+        "wires": [
+            [
+                "adea4321f7d65fbc",
+                "0f6e5e05a384ccbc",
+                "9c001ea7d54b0057"
+            ]
+        ]
+    },
+    {
+        "id": "adea4321f7d65fbc",
+        "type": "subflow:79a320b1aad5b1c6",
+        "z": "a0a86b2bcc8e6558",
+        "g": "e41b34ecb4de2eb1",
+        "name": "rgbw-1 | relay 2",
+        "env": [
+            {
+                "name": "name",
+                "value": "rgbw-1",
+                "type": "str"
+            },
+            {
+                "name": "relay",
+                "value": "2",
+                "type": "num"
+            }
+        ],
+        "x": 260,
+        "y": 440,
+        "wires": [
+            [
+                "c43d88f0a6cf9ecb",
+                "7a1427a0b4711d76"
+            ]
+        ]
+    },
+    {
+        "id": "0f6e5e05a384ccbc",
+        "type": "subflow:cbef3ce630f61ff7",
+        "z": "a0a86b2bcc8e6558",
+        "g": "e41b34ecb4de2eb1",
+        "name": "buttons in | kitchen | 2",
+        "env": [
+            {
+                "name": "name",
+                "value": "kitchen-buttons",
+                "type": "str"
+            },
+            {
+                "name": "button",
+                "value": "2",
+                "type": "num"
+            },
+            {
+                "name": "buttonId",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "id",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "input",
+                "value": "0",
+                "type": "num"
+            }
+        ],
+        "x": 280,
+        "y": 480,
+        "wires": [
+            [
+                "c43d88f0a6cf9ecb"
+            ]
+        ]
+    },
+    {
+        "id": "c43d88f0a6cf9ecb",
+        "type": "subflow:2d585252458c7615",
+        "z": "a0a86b2bcc8e6558",
+        "g": "e41b34ecb4de2eb1",
+        "name": "",
+        "env": [
+            {
+                "name": "timeout",
+                "value": "500",
+                "type": "num"
+            },
+            {
+                "name": "step",
+                "value": "5",
+                "type": "num"
+            }
+        ],
+        "x": 530,
+        "y": 480,
+        "wires": [
+            [
+                "dcd2cc4da81c2d2b"
+            ]
+        ]
+    },
+    {
+        "id": "4fc074817167e9f9",
+        "type": "function",
+        "z": "a0a86b2bcc8e6558",
+        "g": "e41b34ecb4de2eb1",
+        "name": "toggle | ambient",
+        "func": "const topics = [\n  'shellies/rgbw-1/white/2/set',\n  'shellies/rgbw-1/white/3/set',\n];\n\nfor (const topic of topics) {\n  node.send({\n    topic,\n    payload: {\n      turn: 'toggle'\n    }\n  });\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 440,
+        "wires": [
+            [
+                "9028556566f2cb37"
+            ]
+        ]
+    },
+    {
+        "id": "9028556566f2cb37",
+        "type": "mqtt out",
+        "z": "a0a86b2bcc8e6558",
+        "g": "e41b34ecb4de2eb1",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "872ce2a0d0bada26",
+        "x": 1010,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "9c001ea7d54b0057",
+        "type": "subflow:cbef3ce630f61ff7",
+        "z": "a0a86b2bcc8e6558",
+        "g": "e41b34ecb4de2eb1",
+        "name": "buttons in | living room | 0",
+        "env": [
+            {
+                "name": "name",
+                "value": "living-room-buttons",
+                "type": "str"
+            },
+            {
+                "name": "button",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "buttonId",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "id",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "input",
+                "value": "0",
+                "type": "num"
+            }
+        ],
+        "x": 290,
+        "y": 520,
+        "wires": [
+            [
+                "c43d88f0a6cf9ecb"
+            ]
+        ]
+    },
+    {
+        "id": "03a7df41c74aca51",
+        "type": "function",
+        "z": "a0a86b2bcc8e6558",
+        "g": "e41b34ecb4de2eb1",
+        "name": "brightness | ambient",
+        "func": "const topics = [\n  'shellies/rgbw-1/white/2/set',\n  'shellies/rgbw-1/white/3/set',\n];\n\nfor (const topic of topics) {\n  node.send({\n    topic,\n    payload: {\n      'brightness': msg.payload.brightness || msg.payload\n    }\n  });\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 480,
+        "wires": [
+            [
+                "9028556566f2cb37"
+            ]
+        ]
+    },
+    {
+        "id": "aee391f4442804ee",
+        "type": "subflow:257349cc625bde40",
+        "z": "a0a86b2bcc8e6558",
+        "g": "70e28aaa371d1526",
+        "name": "",
+        "x": 530,
+        "y": 80,
+        "wires": [
+            [
+                "715338d3f4fb3ac7"
+            ]
+        ]
+    },
+    {
+        "id": "1c05965e272d4559",
+        "type": "subflow:2e41c0e60bcda4c7",
+        "z": "a0a86b2bcc8e6558",
+        "g": "f55d2c7b19e0ede8",
+        "name": "",
+        "x": 530,
+        "y": 260,
+        "wires": [
+            [
+                "68903cc1339976f2"
+            ]
+        ]
+    },
+    {
+        "id": "dcd2cc4da81c2d2b",
+        "type": "function",
+        "z": "a0a86b2bcc8e6558",
+        "g": "e41b34ecb4de2eb1",
+        "name": "function 1",
+        "func": "if (msg.payload.turn) {\n  return [msg];\n}\n\nelse if (msg.payload.brightness) {\n  return [null, msg];\n}",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 635,
+        "y": 480,
+        "wires": [
+            [
+                "4fc074817167e9f9"
+            ],
+            [
+                "03a7df41c74aca51"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "7a1427a0b4711d76",
+        "type": "subflow:2f4e178c5ad4e48d",
+        "z": "a0a86b2bcc8e6558",
+        "g": "e41b34ecb4de2eb1",
+        "name": "",
+        "x": 530,
+        "y": 440,
+        "wires": [
+            [
+                "4fc074817167e9f9"
+            ],
+            [
+                "03a7df41c74aca51"
+            ]
+        ]
+    },
+    {
+        "id": "c6b94d40a07b7571",
+        "type": "subflow:cbef3ce630f61ff7",
+        "z": "a0a86b2bcc8e6558",
+        "g": "7e6a568d010b4632",
+        "name": "buttons in | kitchen | 3",
+        "env": [
+            {
+                "name": "name",
+                "value": "kitchen-buttons",
+                "type": "str"
+            },
+            {
+                "name": "button",
+                "value": "3",
+                "type": "num"
+            },
+            {
+                "name": "buttonId",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "id",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "input",
+                "value": "0",
+                "type": "num"
+            }
+        ],
+        "x": 280,
+        "y": 660,
+        "wires": [
+            [
+                "913682f3b59ac52b"
+            ]
+        ]
+    },
+    {
+        "id": "913682f3b59ac52b",
+        "type": "subflow:2d585252458c7615",
+        "z": "a0a86b2bcc8e6558",
+        "g": "7e6a568d010b4632",
+        "name": "",
+        "env": [
+            {
+                "name": "timeout",
+                "value": "500",
+                "type": "num"
+            },
+            {
+                "name": "step",
+                "value": "5",
+                "type": "num"
+            }
+        ],
+        "x": 530,
+        "y": 660,
+        "wires": [
+            [
+                "b4b181ef4be0a915"
+            ]
+        ]
+    },
+    {
+        "id": "475f75c4c2eb10d8",
+        "type": "function",
+        "z": "a0a86b2bcc8e6558",
+        "g": "7e6a568d010b4632",
+        "name": "toggle | integrated",
+        "func": "const topics = [\n  'shellies/rgbw-1/white/0/set',\n  'shellies/rgbw-1/white/1/set',\n  'shellies/rgbw-2/white/2/set',\n  'shellies/rgbw-2/white/1/set',\n  'shellies/rgbw-2/white/0/set'\n];\n\nlet timeout = 0;\nfor (const topic of topics) {\n  timeout += 400;\n\n  setTimeout(() => node.send({\n    topic,\n    payload: {\n      'turn': 'toggle'\n    }\n  }), timeout);\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 620,
+        "wires": [
+            [
+                "e77701baef16ec49"
+            ]
+        ]
+    },
+    {
+        "id": "f10ee5104e707864",
+        "type": "subflow:cbef3ce630f61ff7",
+        "z": "a0a86b2bcc8e6558",
+        "g": "7e6a568d010b4632",
+        "name": "buttons in | living room | 1",
+        "env": [
+            {
+                "name": "name",
+                "value": "living-room-buttons",
+                "type": "str"
+            },
+            {
+                "name": "button",
+                "value": "1",
+                "type": "num"
+            },
+            {
+                "name": "buttonId",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "id",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "input",
+                "value": "0",
+                "type": "num"
+            }
+        ],
+        "x": 290,
+        "y": 700,
+        "wires": [
+            [
+                "913682f3b59ac52b"
+            ]
+        ]
+    },
+    {
+        "id": "773441761db531ea",
+        "type": "subflow:79a320b1aad5b1c6",
+        "z": "a0a86b2bcc8e6558",
+        "g": "7e6a568d010b4632",
+        "name": "rgbw-2 | relay 2",
+        "env": [
+            {
+                "name": "name",
+                "value": "rgbw-2",
+                "type": "str"
+            },
+            {
+                "name": "relay",
+                "value": "2",
+                "type": "num"
+            }
+        ],
+        "x": 260,
+        "y": 620,
+        "wires": [
+            [
+                "913682f3b59ac52b",
+                "e52a4e7bc08c18ca"
+            ]
+        ]
+    },
+    {
+        "id": "1e5fd71a8ed698bf",
+        "type": "function",
+        "z": "a0a86b2bcc8e6558",
+        "g": "7e6a568d010b4632",
+        "name": "brightness | integrated",
+        "func": "const topics = [\n  'shellies/rgbw-1/white/0/set',\n  'shellies/rgbw-1/white/1/set',\n  'shellies/rgbw-2/white/2/set',\n  'shellies/rgbw-2/white/1/set',\n  'shellies/rgbw-2/white/0/set'\n];\n\nfor (const topic of topics) {\n  node.send({\n    topic,\n    payload: {\n      'brightness': msg.payload.brightness || msg.payload\n    }\n  });\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 660,
+        "wires": [
+            [
+                "e77701baef16ec49"
+            ]
+        ]
+    },
+    {
+        "id": "b4b181ef4be0a915",
+        "type": "function",
+        "z": "a0a86b2bcc8e6558",
+        "g": "7e6a568d010b4632",
+        "name": "function 2",
+        "func": "if (msg.payload.turn) {\n  return [msg];\n}\n\nelse if (msg.payload.brightness) {\n  return [null, msg];\n}",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 635,
+        "y": 660,
+        "wires": [
+            [
+                "475f75c4c2eb10d8"
+            ],
+            [
+                "1e5fd71a8ed698bf"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "3884ac35ae472890",
+        "type": "mqtt in",
+        "z": "a0a86b2bcc8e6558",
+        "g": "7e6a568d010b4632",
+        "name": "mqtt",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "872ce2a0d0bada26",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 660,
+        "wires": [
+            [
+                "773441761db531ea",
+                "c6b94d40a07b7571",
+                "f10ee5104e707864"
+            ]
+        ]
+    },
+    {
+        "id": "e52a4e7bc08c18ca",
+        "type": "subflow:5774065fbd82585f",
+        "z": "a0a86b2bcc8e6558",
+        "g": "7e6a568d010b4632",
+        "name": "",
+        "x": 530,
+        "y": 620,
+        "wires": [
+            [
+                "475f75c4c2eb10d8"
+            ],
+            [
+                "1e5fd71a8ed698bf"
+            ]
+        ]
+    },
+    {
+        "id": "e77701baef16ec49",
+        "type": "mqtt out",
+        "z": "a0a86b2bcc8e6558",
+        "g": "7e6a568d010b4632",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "872ce2a0d0bada26",
+        "x": 1010,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "7d367520dbc9ad84",
+        "type": "mqtt in",
+        "z": "a0a86b2bcc8e6558",
+        "g": "8b798a26c7d6fc01",
+        "name": "mqtt",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "872ce2a0d0bada26",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 840,
+        "wires": [
+            [
+                "d793a97038cfc19d",
+                "f3d5015e09634c2c",
+                "4eb63e5365042d67"
+            ]
+        ]
+    },
+    {
+        "id": "d793a97038cfc19d",
+        "type": "subflow:492ba385940b0a9c",
+        "z": "a0a86b2bcc8e6558",
+        "g": "8b798a26c7d6fc01",
+        "name": "dimmer in | bedroom",
+        "env": [
+            {
+                "name": "name",
+                "value": "bedroom",
+                "type": "str"
+            }
+        ],
+        "x": 280,
+        "y": 800,
+        "wires": [
+            [
+                "a13f24cb6365754e",
+                "ec652bed47668666"
+            ]
+        ]
+    },
+    {
+        "id": "f3d5015e09634c2c",
+        "type": "subflow:cbef3ce630f61ff7",
+        "z": "a0a86b2bcc8e6558",
+        "g": "8b798a26c7d6fc01",
+        "name": "buttons in | bedroom | 1",
+        "env": [
+            {
+                "name": "name",
+                "value": "bedroom-buttons-1",
+                "type": "str"
+            },
+            {
+                "name": "button",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "buttonId",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "id",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "input",
+                "value": "0",
+                "type": "num"
+            }
+        ],
+        "x": 290,
+        "y": 840,
+        "wires": [
+            [
+                "a13f24cb6365754e"
+            ]
+        ]
+    },
+    {
+        "id": "4eb63e5365042d67",
+        "type": "subflow:cbef3ce630f61ff7",
+        "z": "a0a86b2bcc8e6558",
+        "g": "8b798a26c7d6fc01",
+        "name": "buttons in | bedroom | 2",
+        "env": [
+            {
+                "name": "name",
+                "value": "bedroom-buttons-2",
+                "type": "str"
+            },
+            {
+                "name": "button",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "buttonId",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "id",
+                "value": "0",
+                "type": "num"
+            },
+            {
+                "name": "input",
+                "value": "0",
+                "type": "num"
+            }
+        ],
+        "x": 290,
+        "y": 880,
+        "wires": [
+            [
+                "a13f24cb6365754e"
+            ]
+        ]
+    },
+    {
+        "id": "a13f24cb6365754e",
+        "type": "subflow:2d585252458c7615",
+        "z": "a0a86b2bcc8e6558",
+        "g": "8b798a26c7d6fc01",
+        "name": "",
+        "env": [
+            {
+                "name": "timeout",
+                "value": "500",
+                "type": "num"
+            },
+            {
+                "name": "step",
+                "value": "5",
+                "type": "num"
+            }
+        ],
+        "x": 530,
+        "y": 840,
+        "wires": [
+            [
+                "cb54ed4d7ff08f9a"
+            ]
+        ]
+    },
+    {
+        "id": "cb54ed4d7ff08f9a",
+        "type": "subflow:4c0cd1386899de21",
+        "z": "a0a86b2bcc8e6558",
+        "g": "8b798a26c7d6fc01",
+        "name": "dimmer out | bedroom",
+        "env": [
+            {
+                "name": "name",
+                "value": "bedroom",
+                "type": "str"
+            }
+        ],
+        "x": 740,
+        "y": 820,
+        "wires": [
+            [
+                "45203cfbac0c2608"
+            ]
+        ]
+    },
+    {
+        "id": "45203cfbac0c2608",
+        "type": "mqtt out",
+        "z": "a0a86b2bcc8e6558",
+        "g": "8b798a26c7d6fc01",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "872ce2a0d0bada26",
+        "x": 930,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "ec652bed47668666",
+        "type": "subflow:d21607ed4bd9c3e2",
+        "z": "a0a86b2bcc8e6558",
+        "g": "8b798a26c7d6fc01",
+        "name": "",
+        "x": 510,
+        "y": 800,
+        "wires": [
+            [
+                "cb54ed4d7ff08f9a"
+            ]
+        ]
+    },
+    {
+        "id": "72d12326ac27d3d0",
+        "type": "mqtt in",
+        "z": "a0a86b2bcc8e6558",
+        "g": "593259f5b14bdad3",
+        "name": "mqtt",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "872ce2a0d0bada26",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 90,
+        "y": 1080,
+        "wires": [
+            [
+                "e6f34c6d41f62cb4",
+                "5b0a167104357373"
+            ]
+        ]
+    },
+    {
+        "id": "e6f34c6d41f62cb4",
+        "type": "subflow:492ba385940b0a9c",
+        "z": "a0a86b2bcc8e6558",
+        "g": "593259f5b14bdad3",
+        "name": "dimmer in | wc lamp",
+        "env": [
+            {
+                "name": "name",
+                "value": "wc-lamp",
+                "type": "str"
+            }
+        ],
+        "x": 280,
+        "y": 1060,
+        "wires": [
+            [
+                "877b6b22f10fe625"
+            ]
+        ]
+    },
+    {
+        "id": "5b0a167104357373",
+        "type": "subflow:492ba385940b0a9c",
+        "z": "a0a86b2bcc8e6558",
+        "g": "593259f5b14bdad3",
+        "name": "dimmer in | bathroom",
+        "env": [
+            {
+                "name": "name",
+                "value": "bathroom",
+                "type": "str"
+            }
+        ],
+        "x": 280,
+        "y": 1100,
+        "wires": [
+            [
+                "3e90cd523b63f9bf"
+            ]
+        ]
+    },
+    {
+        "id": "877b6b22f10fe625",
+        "type": "subflow:fbc53d40d3ad022e",
+        "z": "a0a86b2bcc8e6558",
+        "g": "593259f5b14bdad3",
+        "name": "",
+        "x": 490,
+        "y": 1060,
+        "wires": [
+            [
+                "1a28bdf18ec8e12e"
+            ]
+        ]
+    },
+    {
+        "id": "3e90cd523b63f9bf",
+        "type": "subflow:cc0cff40c0be42c3",
+        "z": "a0a86b2bcc8e6558",
+        "g": "593259f5b14bdad3",
+        "name": "",
+        "x": 480,
+        "y": 1100,
+        "wires": [
+            [
+                "7cce2dea7ab2e57d"
+            ]
+        ]
+    },
+    {
+        "id": "1a28bdf18ec8e12e",
+        "type": "subflow:4c0cd1386899de21",
+        "z": "a0a86b2bcc8e6558",
+        "g": "593259f5b14bdad3",
+        "name": "dimmer out | wc lamp",
+        "env": [
+            {
+                "name": "name",
+                "value": "wc-lamp",
+                "type": "str"
+            }
+        ],
+        "x": 740,
+        "y": 1060,
+        "wires": [
+            [
+                "0ffde8114552b859"
+            ]
+        ]
+    },
+    {
+        "id": "0ffde8114552b859",
+        "type": "mqtt out",
+        "z": "a0a86b2bcc8e6558",
+        "g": "593259f5b14bdad3",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "872ce2a0d0bada26",
+        "x": 930,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "7cce2dea7ab2e57d",
+        "type": "subflow:4c0cd1386899de21",
+        "z": "a0a86b2bcc8e6558",
+        "g": "593259f5b14bdad3",
+        "name": "dimmer out | bathroom",
+        "env": [
+            {
+                "name": "name",
+                "value": "bathroom",
+                "type": "str"
+            }
+        ],
+        "x": 740,
+        "y": 1100,
+        "wires": [
+            [
+                "0ffde8114552b859"
+            ]
+        ]
+    },
+    {
+        "id": "da34552cedea09aa",
+        "type": "inject",
+        "z": "a0a86b2bcc8e6558",
+        "g": "593259f5b14bdad3",
+        "name": "ch brightness | night",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "30 23 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"brightness\":10}",
+        "payloadType": "json",
+        "x": 460,
+        "y": 1020,
+        "wires": [
+            [
+                "1a28bdf18ec8e12e"
+            ]
+        ]
+    },
+    {
+        "id": "0ed030613fccdd05",
+        "type": "inject",
+        "z": "a0a86b2bcc8e6558",
+        "g": "593259f5b14bdad3",
+        "name": "ch brightness | day",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "30 07 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"brightness\":50}",
+        "payloadType": "json",
+        "x": 460,
+        "y": 980,
+        "wires": [
+            [
+                "1a28bdf18ec8e12e"
+            ]
+        ]
+    },
+    {
+        "id": "bd622d957a6649e7",
+        "type": "mqtt in",
+        "z": "a0a86b2bcc8e6558",
+        "g": "475b29c6fe19cc2f",
+        "name": "mqtt",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "872ce2a0d0bada26",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1110,
+        "y": 100,
+        "wires": [
+            [
+                "0e715d3cd4295d30"
+            ]
+        ]
+    },
+    {
+        "id": "0e715d3cd4295d30",
+        "type": "function",
+        "z": "a0a86b2bcc8e6558",
+        "g": "475b29c6fe19cc2f",
+        "name": "",
+        "func": "if (!msg.topic.startsWith('shellies/cabinet')) {\n  return;\n}\n\nif (!msg.topic.endsWith('/events/rpc')) {\n  return;\n}\n\nconst { method } = msg.payload;\n\nif (method !== 'NotifyStatus') {\n  return;\n}\n\nconst { params } = msg.payload;\n\nif (params['switch:0']) {\n  const { output } = params['switch:0'];\n  return {\n    payload: output\n  };\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1195,
+        "y": 100,
+        "wires": [
+            [
+                "3ad3acf5882144a3"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "3ad3acf5882144a3",
+        "type": "ui-switch",
+        "z": "a0a86b2bcc8e6558",
+        "g": "475b29c6fe19cc2f",
+        "name": "",
+        "label": "On / Off",
+        "group": "535b1c0c6989df4e",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "className": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "x": 1245,
+        "y": 100,
+        "wires": [
+            [
+                "44acc098596467ab"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "44acc098596467ab",
+        "type": "function",
+        "z": "a0a86b2bcc8e6558",
+        "g": "475b29c6fe19cc2f",
+        "name": "",
+        "func": "return {\n  topic: 'shellies/cabinet/command/switch:0',\n  payload: msg.payload ? 'on' : 'off'\n};\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1295,
+        "y": 100,
+        "wires": [
+            [
+                "690fa293b8ad6c11"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "690fa293b8ad6c11",
+        "type": "mqtt out",
+        "z": "a0a86b2bcc8e6558",
+        "g": "475b29c6fe19cc2f",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "872ce2a0d0bada26",
+        "x": 1390,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "ac21c02cac1dfbb9",
+        "type": "mqtt in",
+        "z": "a0a86b2bcc8e6558",
+        "g": "c670bbc601d06f66",
+        "name": "mqtt",
+        "topic": "#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "872ce2a0d0bada26",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1110,
+        "y": 800,
+        "wires": [
+            [
+                "6945fa7671640154"
+            ]
+        ]
+    },
+    {
+        "id": "6945fa7671640154",
+        "type": "subflow:492ba385940b0a9c",
+        "z": "a0a86b2bcc8e6558",
+        "g": "c670bbc601d06f66",
+        "name": "dimmer in | children",
+        "env": [
+            {
+                "name": "name",
+                "value": "children",
+                "type": "str"
+            }
+        ],
+        "x": 1270,
+        "y": 800,
+        "wires": [
+            [
+                "99f02fbd5222c74c"
+            ]
+        ]
+    },
+    {
+        "id": "7e353c865aeadf04",
+        "type": "subflow:4c0cd1386899de21",
+        "z": "a0a86b2bcc8e6558",
+        "g": "c670bbc601d06f66",
+        "name": "dimmer out | children",
+        "env": [
+            {
+                "name": "name",
+                "value": "children",
+                "type": "str"
+            }
+        ],
+        "x": 1440,
+        "y": 860,
+        "wires": [
+            [
+                "b6e75cf8831334d2"
+            ]
+        ]
+    },
+    {
+        "id": "b6e75cf8831334d2",
+        "type": "mqtt out",
+        "z": "a0a86b2bcc8e6558",
+        "g": "c670bbc601d06f66",
+        "name": "",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "872ce2a0d0bada26",
+        "x": 1610,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "99f02fbd5222c74c",
+        "type": "subflow:56930ca583a30724",
+        "z": "a0a86b2bcc8e6558",
+        "g": "c670bbc601d06f66",
+        "name": "",
+        "x": 1250,
+        "y": 860,
+        "wires": [
+            [
+                "7e353c865aeadf04"
+            ]
+        ]
+    },
+    {
+        "id": "872ce2a0d0bada26",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "mosquitto",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "535b1c0c6989df4e",
+        "type": "ui-group",
+        "name": "Kitchen: Cabinet",
+        "page": "c59aa56799b651c9",
+        "width": "6",
+        "height": "1",
+        "order": 1,
+        "showTitle": true,
+        "className": "",
+        "visible": "true",
+        "disabled": false
+    }
+]

@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    restart: always
+    container_name: homeapp-mosquitto
+    volumes:
+      - ./mosquitto/config:/mosquitto/config:rw
+      - ./mosquitto/data:/mosquitto/data:rw
+      - ./mosquitto/log:/mosquitto/log:rw
+    ports:
+      - "1883:1883" # default mqtt port
+      - "9001:9001" # default mqtt port for websockets
+    networks:
+      - homeapp
+
+  nodered:
+    image: nodered/node-red
+    restart: always
+    container_name: homeapp-nodered
+    environment:
+      - TZ=Europe/Sofia
+    volumes:
+      - ./nodered/data:/data:rw
+    ports:
+      - "1880:1880"
+    networks:
+      - homeapp
+#    devices:
+#      - "/dev/ttyACM0:/dev/ttyACM0"
+#    group_add:
+#      - "20" # host dialout GID
+
+networks:
+  homeapp:
+    driver: bridge
