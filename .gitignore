@@ -20,6 +20,8 @@ mosquitto/config/*.passwd
 nodered/data/.npm/
 nodered/data/node_modules/
 nodered/data/context/
+nodered/data/.config.json
 nodered/data/.config.users.json
 nodered/data/.sessions.json
+nodered/data/*.backup
 nodered/data/flows*_cred.json
